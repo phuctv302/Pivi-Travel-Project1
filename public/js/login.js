@@ -17,10 +17,10 @@ export const login = async (email, password) => {
       showAlert('success', 'Login successfully!', 3000);
       window.setTimeout(() => {
         location.assign('/');
-      }, 1500);
+      }, 2);
     }
   } catch (err) {
-    showAlert('error', err.response.data.message, 3000);
+    showAlert('error', err.response.data.message, 3);
   }
 };
 
@@ -36,6 +36,6 @@ export const logout = async () => {
     }
   } catch (err) {
     console.log('Error', err);
-    showAlert('error', 'Error logging out! Please try again.');
+    showAlert('error', 'Error logging out! Please try again.', 3);
   }
 };

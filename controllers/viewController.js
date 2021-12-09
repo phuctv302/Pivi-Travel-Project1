@@ -4,6 +4,19 @@ const AppError = require('../utils/appError');
 const Booking = require('../models/bookingModel');
 const Tour = require('../models/tourModel');
 
+// CREATE ALERT MESSAGE TO BODY AFTER BOOKING A TOUR
+exports.alerts = (req, res, next) => {
+  const { alert } = req.query;
+
+  if (alert === 'booking') {
+    const message =
+      "Your booking was successful! Please check your email for a confirmation. If your booking doesn't show up here immediately, please come back later.";
+
+    res.locals.alert = message;
+  }
+  next();
+};
+
 // ALL TOURS
 exports.getOverView = catchAsync(async (req, res, next) => {
   // Get all tours data
@@ -65,6 +78,7 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   const tours = await Tour.find({ _id: { $in: tourIDs } });
 
   res.status(200).render('overview', {
+    title: 'Your tours',
     tours,
   });
 });
