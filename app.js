@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const bookingRouter = require('./routes/bookingRoutes');
 const tourRouter = require('./routes/tourRoutes');
@@ -16,12 +17,21 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const bookingController = require('./controllers/bookingController');
 
 const app = express();
+
+// Trust proxy -> req.headers['x-forwarded-proto'] set -> can read its value
+app.enable('trust proxy');
 
 // DEFINE VIEW ENGINE
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+
+/* GLOBAL MIDDLEWARE */
+// ALLOW OTHER WEBSITE TO ACCESS OUT API
+app.use(cors()); // work for get, post
+app.options('*', cors()); // work for patch, delete, cookie,...
 
 // SERVER STATIC FILES
 app.use(express.static(path.join(__dirname, 'public')));
@@ -33,7 +43,6 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in 1 hour!',
 });
 
-// GLOBAL MIDDLEWARE
 // Set secure HTTP Headers
 app.use(
   helmet({
@@ -47,6 +56,13 @@ app.use('/api', limiter);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// Webhook checkout for payment
+app.post(
+  '/webhooks-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+);
 
 // body parse
 app.use(express.json());
