@@ -6,7 +6,10 @@ block content
       .banner-bg
         .banner__backdrop
         .banner__content
-          h1.banner__content--title Pivi Travel
+          if title == 'Your tours'
+            h1.banner__content--title Your booking tours
+          else
+            h1.banner__content--title Pivi Travel
 
     .card-container
       each tour in tours

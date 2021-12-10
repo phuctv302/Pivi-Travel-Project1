@@ -11,6 +11,8 @@ router.use(authController.isLoggedIn);
 
 router.get('/', viewController.getOverView);
 
+router.get('/search', viewController.searchTour);
+
 router.get('/my-tours', authController.protect, viewController.getMyTours);
 
 router.get('/tour/:slug', viewController.getTour);
