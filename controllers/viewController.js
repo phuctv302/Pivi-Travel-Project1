@@ -19,12 +19,19 @@ exports.alerts = (req, res, next) => {
 
 // ALL TOURS
 exports.getOverView = catchAsync(async (req, res, next) => {
+  const limit = 3;
+  const page = req.params.page * 1 || 1;
+  const skip = (page - 1) * limit;
+
   // Get all tours data
-  const tours = await Tour.find();
+  const tours = await Tour.find().skip(skip).limit(limit);
+  const maxPage = Math.ceil((await Tour.countDocuments()) / limit);
 
   res.status(200).render('overview', {
     title: 'All Exciting tours',
     tours,
+    maxPage,
+    current: page,
   });
 });
 

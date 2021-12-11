@@ -17,7 +17,7 @@ block content
           .card__header
             .card__picture
               .card__picture-overlay &nbsp;
-              img.card__picture-img(src=`img/tours/${tour.imageCover}`, alt=`${tour.name}`)
+              img.card__picture-img(src=`/img/tours/${tour.imageCover}`, alt=`${tour.name}`)
             h3.heading-tertirary
               span= tour.name
 
@@ -26,19 +26,19 @@ block content
             p.card__text= tour.summary
             .card__data
               svg.card__icon
-                use(xlink:href='img/icons.svg#icon-map-pin')
+                use(xlink:href='/img/icons.svg#icon-map-pin')
               span= tour.startLocation.description
             .card__data
               svg.card__icon
-                use(xlink:href='img/icons.svg#icon-calendar')
+                use(xlink:href='/img/icons.svg#icon-calendar')
               span= tour.startDates[0].toLocaleString('en-us', {month: 'long', year: 'numeric'})
             .card__data
               svg.card__icon
-                use(xlink:href='img/icons.svg#icon-flag')
+                use(xlink:href='/img/icons.svg#icon-flag')
               span= `${tour.locations.length} stops`
             .card__data
               svg.card__icon
-                use(xlink:href='img/icons.svg#icon-user')
+                use(xlink:href='/img/icons.svg#icon-user')
               span= `${tour.maxGroupSize} people`
 
           .card__footer 
@@ -52,16 +52,55 @@ block content
             a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
             a.btn.btn--green.btn--small(href='/add-review') Rate
 
+    //- Pagination
     nav(arial-label='page pagination')
       ul.pagination.pagination-lg.justify-content-center
-        li.page-item.disabled
-          a.page-link(href='#', tabindex='-1', aria-disabled='true') Previous
-        li.page-item
-          a.page-link(href='#') 1
-        li.page-item.active(aria-current='page')
-          a.page-link(href='#') 2
-        li.page-item
-          a.page-link(href='#') 3
-        li.page-item
-          a.page-link(href='#') Next
+        if current === 1
+          li.page-item.disabled
+            a.page-link(href=`#`, tabindex='-1', aria-disabled='true') Previous
+        else 
+          li.page-item
+            a.page-link(href=`/tours/${current-1}`) Previous
+            
+
+        if maxPage <= 3
+          - for (let i = 1; i <= maxPage; i++)
+            li.page-item(class=`${current === i ? 'active' : ''}`)
+              a.page-link(href=`/tours/${i}`)= i
+        else
+          if current < 3
+            - for (let i = 1; i <= 3; i++)  
+              li.page-item(class=`${current === i ? 'active' : ''}`)
+                a.page-link(href=`/tours/${i}`)= i
+            li.page-item
+              a.page-link(href=`/tours/${maxPage}`, aria-label='Last')
+                span(aria-hidden="true") &raquo;
+
+          else if current === maxPage
+            li.page-item
+              a.page-link(href='/tours/1', aria-label='First')
+                span(aria-hidden="true") &laquo;
+            - for (let i = current - 2; i <= maxPage; i++)
+              li.page-item(class=`${current === i ? 'active' : ''}`)
+                a.page-link(href=`/tours/${i}`)= i
+
+          
+          else 
+            li.page-item
+              a.page-link(href='/tours/1', aria-label='First')
+                span(aria-hidden="true") &laquo;
+            - for (let i = current-1; i <= current+1; i++)
+              li.page-item(class=`${current === i ? 'active' : ''}`)
+                a.page-link(href=`/tours/${i}`)= i
+            li.page-item
+              a.page-link(href=`/tours/${maxPage}`, aria-label='Last')
+                span(aria-hidden="true") &raquo;
+
+
+        if current === maxPage
+          li.page-item.disabled
+            a.page-link(href=`#`, tabindex='-1', aria-disabled='true') Next
+        else
+          li.page-item
+            a.page-link(href=`/tours/${current+1}`) Next
     
