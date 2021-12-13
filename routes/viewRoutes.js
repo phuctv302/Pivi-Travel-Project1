@@ -10,7 +10,7 @@ router.use(viewController.alerts);
 router.use(authController.isLoggedIn);
 
 router.get('/', viewController.getOverView);
-router.get('/tours/:page', viewController.getOverView);
+router.get('/tours/:page/:sortBy', viewController.getOverView);
 
 router.get('/search', viewController.searchTour);
 

@@ -1376,3 +1376,39 @@ body {
 .pagination {
   margin-top: 100px;
 }
+
+/* FILTER */
+.form__filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.form__filter .filter {
+  text-decoration: none;
+  color: white;
+  width: 200px;
+  height: 50px;
+  background-color: #2e4c6d;
+  margin: 0 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 25px;
+  transition: all ease 0.3s;
+}
+
+.form__filter .filter:hover {
+  background-color: #396eb0;
+}
+
+.form__filter .filter:focus {
+  background-color: #396eb0;
+}
+
+.form__filter .filter--active {
+  background-color: #396eb0;
+}

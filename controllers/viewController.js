@@ -19,19 +19,27 @@ exports.alerts = (req, res, next) => {
 
 // ALL TOURS
 exports.getOverView = catchAsync(async (req, res, next) => {
+  // PAGINATE
   const limit = 3;
   const page = req.params.page * 1 || 1;
   const skip = (page - 1) * limit;
 
   // Get all tours data
-  const tours = await Tour.find().skip(skip).limit(limit);
+  let query = Tour.find().skip(skip).limit(limit);
   const maxPage = Math.ceil((await Tour.countDocuments()) / limit);
+
+  // SORT
+  let tours;
+  const { sortBy } = req.params;
+  if (sortBy) tours = await query.sort(sortBy).sort('_id');
+  else tours = await query.sort('-createdAt _id');
 
   res.status(200).render('overview', {
     title: 'All Exciting tours',
     tours,
     maxPage,
     current: page,
+    sortBy,
   });
 });
 
