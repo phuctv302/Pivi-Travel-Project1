@@ -1412,3 +1412,10 @@ body {
 .form__filter .filter--active {
   background-color: #396eb0;
 }
+
+/* Forgot password */
+.forgot-password {
+  color: #3282b8;
+  margin-top: 20px;
+  font-size: 1.4rem;
+}

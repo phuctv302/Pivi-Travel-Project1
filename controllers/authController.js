@@ -192,7 +192,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     // User access to this URL to change password
     const resetURL = `${req.protocol}://${req.get(
       'host'
-    )}/api/v1/users/resetPassword/${resetToken}`;
+    )}/reset-password/${resetToken}`;
 
     await new Email(user, resetURL).sendPasswordReset();
 

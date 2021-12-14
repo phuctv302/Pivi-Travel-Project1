@@ -39,3 +39,48 @@ export const logout = async () => {
     showAlert('error', 'Error logging out! Please try again.', 3);
   }
 };
+
+export const forgotPassword = async (email) => {
+  try {
+    const res = await axios({
+      method: 'POST',
+      url: '/api/v1/users/forgotPassword',
+      data: {
+        email,
+      },
+    });
+
+    if (res.data.status === 'success') {
+      showAlert('success', 'Please check your email!', 3);
+    }
+  } catch (err) {
+    console.log('Error', err);
+    showAlert('error', err.response.data.message, 3);
+  }
+};
+
+export const resetPassword = async (password, passwordConfirm, token) => {
+  try {
+    const res = await axios({
+      method: 'POST',
+      url: `/api/v1/users/resetPassword/${token}`,
+      data: {
+        password,
+        passwordConfirm,
+      },
+    });
+
+    if (res.data.status === 'success') {
+      showAlert(
+        'success',
+        'Reset password successfully! Please remember your password.',
+        4
+      );
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 2000);
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message, 3);
+  }
+};

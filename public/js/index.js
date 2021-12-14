@@ -1,7 +1,7 @@
 /* eslint-disable */
 import '@babel/polyfill';
 import { showAlert } from './alert';
-import { login, logout } from './login';
+import { login, logout, forgotPassword, resetPassword } from './login';
 import { displayMap } from './mapbox';
 import { bookTour } from './stripe';
 import { updateSettings } from './updateSetting';
@@ -14,6 +14,8 @@ const updateDataForm = document.querySelector('.form-user-data');
 const updatePasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const alertMessage = document.querySelector('body').dataset.alert;
+const forgotPasswordForm = document.querySelector('.form--forgot-password');
+const resetPasswordForm = document.querySelector('.form--reset-password');
 
 // DELEGATION
 if (mapBox) {
@@ -44,7 +46,7 @@ if (updateDataForm) {
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
-    await updateSettings(form, 'data');
+    updateSettings(form, 'data');
 
     document.querySelector('.btn--save-data').textContent = 'Save settings';
   });
@@ -77,4 +79,22 @@ if (bookBtn) {
 
 if (alertMessage) {
   showAlert('success', alertMessage, 12);
+}
+
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    forgotPassword(email);
+  });
+}
+
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const token = resetPasswordForm.dataset.token;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+    resetPassword(password, passwordConfirm, token);
+  });
 }

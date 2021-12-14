@@ -110,6 +110,20 @@ exports.login = (req, res) => {
   });
 };
 
+exports.forgotPassword = (req, res) => {
+  res.status(200).render('forgotPassword', {
+    title: 'Forgot password',
+  });
+};
+
+exports.resetPassword = (req, res) => {
+  const { token } = req.params;
+  res.status(200).render('resetPassword', {
+    title: 'Reset your password',
+    token,
+  });
+};
+
 exports.getAccount = (req, res) => {
   res.status(200).render('account', {
     title: 'Your account',
