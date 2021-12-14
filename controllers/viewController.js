@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -88,6 +90,19 @@ exports.searchTour = catchAsync(async (req, res, next) => {
   res.status(200).render('overview', {
     title: `Search ${value}`,
     tours: data,
+  });
+});
+
+// GET TOP 5 BEST CHEAP TOURS
+exports.getTop5Tours = catchAsync(async (req, res, next) => {
+  const limit = 5;
+  const sortBy = 'price -ratingAverage';
+
+  const tours = await Tour.find().sort(sortBy).limit(limit);
+
+  res.status(200).render('overview', {
+    title: 'Top 5 tours',
+    tours,
   });
 });
 

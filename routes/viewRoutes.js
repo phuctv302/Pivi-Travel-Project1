@@ -11,12 +11,13 @@ router.use(authController.isLoggedIn);
 
 router.get('/', viewController.getOverView);
 router.get('/tours/:page/:sortBy', viewController.getOverView);
+router.get('/top-5-tours', viewController.getTop5Tours);
 
 router.get('/search', viewController.searchTour);
 
 router.get('/my-tours', authController.protect, viewController.getMyTours);
-
 router.get('/tour/:slug', viewController.getTour);
+
 router.get('/login', viewController.login);
 router.get('/signup', viewController.signup);
 router.get('/forgot-password', viewController.forgotPassword);
