@@ -25,7 +25,7 @@ router.get('/reset-password/:token', viewController.resetPassword);
 
 router.get('/me', authController.protect, viewController.getAccount);
 router.get(
-  '/add-review',
+  '/add-review/:tourSlug',
   authController.protect,
   authController.restrictTo('user'),
   viewController.addReview

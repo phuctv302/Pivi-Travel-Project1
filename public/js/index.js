@@ -3,6 +3,7 @@ import '@babel/polyfill';
 import { showAlert } from './alert';
 import { login, logout, forgotPassword, resetPassword } from './login';
 import { displayMap } from './mapbox';
+import { addReview } from './review';
 import { bookTour } from './stripe';
 import { updateSettings } from './updateSetting';
 
@@ -16,6 +17,7 @@ const bookBtn = document.getElementById('book-tour');
 const alertMessage = document.querySelector('body').dataset.alert;
 const forgotPasswordForm = document.querySelector('.form--forgot-password');
 const resetPasswordForm = document.querySelector('.form--reset-password');
+const addReviewForm = document.querySelector('.form--review');
 
 // DELEGATION
 if (mapBox) {
@@ -96,5 +98,17 @@ if (resetPasswordForm) {
     const password = document.getElementById('password').value;
     const passwordConfirm = document.getElementById('password-confirm').value;
     resetPassword(password, passwordConfirm, token);
+  });
+}
+
+if (addReviewForm) {
+  addReviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const tourId = addReviewForm.dataset.tourId;
+    const tourSlug = addReviewForm.dataset.tourSlug;
+    const review = document.getElementById('review').value;
+    const rating = document.getElementById('rating').value;
+    addReview(review, rating, tourId, tourSlug);
   });
 }

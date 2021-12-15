@@ -106,10 +106,15 @@ exports.getTop5Tours = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.addReview = (req, res) => {
+exports.addReview = async (req, res) => {
+  const { tourSlug } = req.params;
+  const tour = await Tour.findOne({ slug: tourSlug });
+  const tourId = tour._id;
   res.status(200).render('addReview', {
     title: 'Add Review',
-    tour: 'The Forest Hiker',
+    tour: tour.name,
+    tourSlug,
+    tourId,
   });
 };
 

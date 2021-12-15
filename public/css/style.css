@@ -1419,3 +1419,8 @@ body {
   margin-top: 20px;
   font-size: 1.4rem;
 }
+
+/* Review form */
+#rating {
+  width: 130px;
+}
