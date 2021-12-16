@@ -1,7 +1,7 @@
 /* eslint-disable */
 import '@babel/polyfill';
 import { showAlert } from './alert';
-import { login, logout, forgotPassword, resetPassword } from './login';
+import { login, logout, forgotPassword, resetPassword, signup } from './auth';
 import { displayMap } from './mapbox';
 import { addReview } from './review';
 import { bookTour } from './stripe';
@@ -9,14 +9,18 @@ import { updateSettings } from './updateSetting';
 
 // GET ELEMENT
 const mapBox = document.getElementById('map');
+
+const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const updateDataForm = document.querySelector('.form-user-data');
 const updatePasswordForm = document.querySelector('.form-user-password');
-const bookBtn = document.getElementById('book-tour');
-const alertMessage = document.querySelector('body').dataset.alert;
+
 const forgotPasswordForm = document.querySelector('.form--forgot-password');
 const resetPasswordForm = document.querySelector('.form--reset-password');
+
+const bookBtn = document.getElementById('book-tour');
+const alertMessage = document.querySelector('body').dataset.alert;
 const addReviewForm = document.querySelector('.form--review');
 
 // DELEGATION
@@ -110,5 +114,18 @@ if (addReviewForm) {
     const review = document.getElementById('review').value;
     const rating = document.getElementById('rating').value;
     addReview(review, rating, tourId, tourSlug);
+  });
+}
+
+if (signupForm) {
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+
+    signup(name, email, password, passwordConfirm);
   });
 }

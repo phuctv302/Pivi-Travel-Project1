@@ -4,18 +4,18 @@ block content
   main.main
     .signup-form
       h2.heading-secondary.ma-bt-lg Sign up new account
-      form.form
+      form.form--signup
         .form__group
-          label.form__label(for='new-name') Your name
-          input#new-name.form__input(type='text', placeholder='Enter your name', required)
+          label.form__label(for='name') Your name
+          input#name.form__input(type='text', placeholder='Enter your name', required)
         .form__group
-          label.form__label(for='new-email') Email address
-          input#new-email.form__input(type='email', placeholder='you@example.com', required)
+          label.form__label(for='email') Email address
+          input#email.form__input(type='email', placeholder='you@example.com', required)
         .form__group.ma-bt-md
-          label.form__label(for='new-password') Password
-          input#new-password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+          label.form__label(for='password') Password
+          input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
         .form__group.ma-bt-md
-          label.form__label(for='new-password-confirm') Confirm Password
-          input#new-password-confirm.form__input(type='password-confirm', placeholder='••••••••', required, minlength='8')
+          label.form__label(for='password-confirm') Confirm Password
+          input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
         .form__group
-          button.btn.btn--green Sign up
+          button.btn.btn--green.btn--signup Sign up

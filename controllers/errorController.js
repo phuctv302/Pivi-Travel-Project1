@@ -48,9 +48,6 @@ const sendErrorDev = (err, req, res) => {
     });
   }
   // B) RENDER WEBSITE
-  console.log('ERROR 💥', err);
-  console.log('😔 ERROR NAME: ', err.name);
-
   return res.status(500).render('error', {
     title: 'Something went wrong!',
     msg: err.message,
