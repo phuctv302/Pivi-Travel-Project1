@@ -16,13 +16,13 @@ export const signup = async (name, email, password, passwordConfirm) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', 'Sign up successfully!', 3);
+      showAlert('success', 'Sign up successfully!');
       window.setTimeout(() => {
         location.assign('/');
       }, 2000);
     }
   } catch (err) {
-    showAlert('error', err.response.data.message, 3);
+    showAlert('error', err.response.data.message);
   }
 };
 
@@ -38,13 +38,13 @@ export const login = async (email, password) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', 'Login successfully!', 3000);
+      showAlert('success', 'Login successfully!');
       window.setTimeout(() => {
         location.assign('/');
-      }, 2);
+      }, 1000);
     }
   } catch (err) {
-    showAlert('error', err.response.data.message, 3);
+    showAlert('error', err.response.data.message);
   }
 };
 
@@ -60,7 +60,7 @@ export const logout = async () => {
     }
   } catch (err) {
     console.log('Error', err);
-    showAlert('error', 'Error logging out! Please try again.', 3);
+    showAlert('error', 'Error logging out! Please try again.');
   }
 };
 
@@ -75,11 +75,11 @@ export const forgotPassword = async (email) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', 'Please check your email!', 3);
+      showAlert('success', 'Please check your email!');
     }
   } catch (err) {
     console.log('Error', err);
-    showAlert('error', err.response.data.message, 3);
+    showAlert('error', err.response.data.message);
   }
 };
 
@@ -105,6 +105,6 @@ export const resetPassword = async (password, passwordConfirm, token) => {
       }, 2000);
     }
   } catch (err) {
-    showAlert('error', err.response.data.message, 3);
+    showAlert('error', err.response.data.message);
   }
 };

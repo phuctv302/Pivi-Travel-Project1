@@ -110,10 +110,9 @@ if (addReviewForm) {
     e.preventDefault();
 
     const tourId = addReviewForm.dataset.tourId;
-    const tourSlug = addReviewForm.dataset.tourSlug;
     const review = document.getElementById('review').value;
     const rating = document.getElementById('rating').value;
-    addReview(review, rating, tourId, tourSlug);
+    addReview(review, rating, tourId);
   });
 }
 

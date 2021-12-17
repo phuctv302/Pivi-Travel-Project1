@@ -7,7 +7,7 @@ const hideAlert = () => {
 
 // type is either success or error
 // time: time to hide the alert
-export const showAlert = (type, msg, time) => {
+export const showAlert = (type, msg, time = 5) => {
   hideAlert();
 
   const markup = `<div class='alert alert--${type}'>${msg}</div>`;

@@ -1,4 +1,4 @@
-const axios = require('axios');
+const slug = require('slugify');
 
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -28,13 +28,22 @@ exports.getOverView = catchAsync(async (req, res, next) => {
 
   // Get all tours data
   let query = Tour.find().skip(skip).limit(limit);
-  const maxPage = Math.ceil((await Tour.countDocuments()) / limit);
+  let maxPage = Math.ceil((await Tour.countDocuments()) / limit);
 
   // SORT
   let tours;
   const { sortBy } = req.params;
-  if (sortBy) tours = await query.sort(sortBy).sort('_id');
+  if (sortBy) tours = await query.sort(sortBy).sort('-createdAt _id');
   else tours = await query.sort('-createdAt _id');
+
+  // SEARCH
+  let value;
+  if (req.query.name) {
+    value = slug(req.query.name);
+    tours = tours.filter((tour) => tour.slug.includes(value));
+    if (tours.length === 0) return next(new AppError('No tour found', 404));
+    maxPage = Math.ceil(tours.length / limit);
+  }
 
   res.status(200).render('overview', {
     title: 'All Exciting tours',
@@ -71,14 +80,14 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   const tours = await Tour.find({ _id: { $in: tourIDs } });
 
   res.status(200).render('overview', {
-    title: 'Your tours',
+    title: 'My tours',
     tours,
   });
 });
 
 // SEARCH TOUR
 exports.searchTour = catchAsync(async (req, res, next) => {
-  const value = req.query.name.toLowerCase().split(' ').join('');
+  const value = req.params.name.toLowerCase().split(' ').join('');
   const tours = await Tour.find();
 
   const data = tours.filter((tour) =>
@@ -109,12 +118,9 @@ exports.getTop5Tours = catchAsync(async (req, res, next) => {
 exports.addReview = async (req, res) => {
   const { tourSlug } = req.params;
   const tour = await Tour.findOne({ slug: tourSlug });
-  const tourId = tour._id;
   res.status(200).render('addReview', {
     title: 'Add Review',
-    tour: tour.name,
-    tourSlug,
-    tourId,
+    tour,
   });
 };
 
