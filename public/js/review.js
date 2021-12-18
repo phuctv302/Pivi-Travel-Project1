@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { showAlert } from './alert';
 
-export const addReview = async (review, rating, tourId) => {
+export const addReview = async (review, rating, tourId, tourSlug) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -15,7 +15,7 @@ export const addReview = async (review, rating, tourId) => {
 
     if (res.data.status === 'success') {
       showAlert('success', 'Thanks for your reviewing!', 3);
-      window.setTimeout(() => location.assign('/my-tours'));
+      window.setTimeout(() => location.assign(`/tour/${tourSlug}`), 1500);
     }
   } catch (err) {
     showAlert('error', err.response.data.message, 3);

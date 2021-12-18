@@ -13,7 +13,7 @@ block content
           else
             h1.banner__content--title Pivi Travel
 
-    if title != 'Top 5 tours' && title != 'My tours'
+    if current || sortBy && title != 'My tours' && title != 'Top 5 tours'
       form.form__filter
         a.filter(class=`${sortBy === 'price' ? 'filter--active': ''}`, href=`/tours/page/${current}/sort/price`) Sort by price 
         a.filter(class=`${sortBy === 'rating' ? 'filter--active': ''}`, href=`/tours/page/${current}/sort/ratingsAverage`) Sort by average rating
@@ -61,58 +61,59 @@ block content
             a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
             a.btn.btn--green.btn--small(href=`/add-review/${tour.slug}`) Rate
 
-    //- Pagination
-    - sortBy = sortBy ? `sort/${sortBy}` : ''
+    if current || sortBy
+      //- Pagination
+      - sortBy = sortBy ? `sort/${sortBy}` : ''
 
-    if title != 'Top 5 tours' && title != 'My tours'
-      nav(arial-label='page pagination')
-        ul.pagination.pagination-lg.justify-content-center
-          if current === 1
-            li.page-item.disabled
-              a.page-link(href=`#`, tabindex='-1', aria-disabled='true') Previous
-          else 
-            li.page-item
-              a.page-link(href=`/tours/page/${current-1}/${sortBy}`) Previous
-              
-
-          if maxPage <= 3
-            - for (let i = 1; i <= maxPage; i++)
-              li.page-item(class=`${current === i ? 'active' : ''}`)
-                a.page-link(href=`/tours/page/${i}/${sortBy}`)= i
-          else
-            if current < 3
-              - for (let i = 1; i <= 3; i++)  
-                li.page-item(class=`${current === i ? 'active' : ''}`)
-                  a.page-link(href=`/tours/page/${i}/${sortBy}`)= i
-              li.page-item
-                a.page-link(href=`/tours/page/${maxPage}/${sortBy}`, aria-label='Last')
-                  span(aria-hidden="true") &raquo;
-
-            else if current === maxPage
-              li.page-item
-                a.page-link(href=`/tours/page/1/${sortBy}`, aria-label='First')
-                  span(aria-hidden="true") &laquo;
-              - for (let i = current - 2; i <= maxPage; i++)
-                li.page-item(class=`${current === i ? 'active' : ''}`)
-                  a.page-link(href=`/tours/page/${i}/${sortBy}`)= i
-
-            
+      if title != 'Top 5 tours' && title != 'My tours'
+        nav(arial-label='page pagination')
+          ul.pagination.pagination-lg.justify-content-center
+            if current === 1
+              li.page-item.disabled
+                a.page-link(href=`#`, tabindex='-1', aria-disabled='true') Previous
             else 
               li.page-item
-                a.page-link(href=`/tours/page/1/${sortBy}`, aria-label='First')
-                  span(aria-hidden="true") &laquo;
-              - for (let i = current-1; i <= current+1; i++)
+                a.page-link(href=`/tours/page/${current-1}/${sortBy}`) Previous
+                
+
+            if maxPage <= 3
+              - for (let i = 1; i <= maxPage; i++)
                 li.page-item(class=`${current === i ? 'active' : ''}`)
                   a.page-link(href=`/tours/page/${i}/${sortBy}`)= i
+            else
+              if current < 3
+                - for (let i = 1; i <= 3; i++)  
+                  li.page-item(class=`${current === i ? 'active' : ''}`)
+                    a.page-link(href=`/tours/page/${i}/${sortBy}`)= i
+                li.page-item
+                  a.page-link(href=`/tours/page/${maxPage}/${sortBy}`, aria-label='Last')
+                    span(aria-hidden="true") &raquo;
+
+              else if current === maxPage
+                li.page-item
+                  a.page-link(href=`/tours/page/1/${sortBy}`, aria-label='First')
+                    span(aria-hidden="true") &laquo;
+                - for (let i = current - 2; i <= maxPage; i++)
+                  li.page-item(class=`${current === i ? 'active' : ''}`)
+                    a.page-link(href=`/tours/page/${i}/${sortBy}`)= i
+
+              
+              else 
+                li.page-item
+                  a.page-link(href=`/tours/page/1/${sortBy}`, aria-label='First')
+                    span(aria-hidden="true") &laquo;
+                - for (let i = current-1; i <= current+1; i++)
+                  li.page-item(class=`${current === i ? 'active' : ''}`)
+                    a.page-link(href=`/tours/page/${i}/${sortBy}`)= i
+                li.page-item
+                  a.page-link(href=`/tours/page/${maxPage}/${sortBy}`, aria-label='Last')
+                    span(aria-hidden="true") &raquo;
+
+
+            if current === maxPage
+              li.page-item.disabled
+                a.page-link(href=`#`, tabindex='-1', aria-disabled='true') Next
+            else
               li.page-item
-                a.page-link(href=`/tours/page/${maxPage}/${sortBy}`, aria-label='Last')
-                  span(aria-hidden="true") &raquo;
-
-
-          if current === maxPage
-            li.page-item.disabled
-              a.page-link(href=`#`, tabindex='-1', aria-disabled='true') Next
-          else
-            li.page-item
-              a.page-link(href=`/tours/page/${current+1}/${sortBy}`) Next
+                a.page-link(href=`/tours/page/${current+1}/${sortBy}`) Next
     

@@ -1,8 +1,8 @@
 header.header
   nav.nav.nav--tours
     a.nav__el(href='/') All tours
-    form.nav__search
-      button.nav__search-btn(action='/', method='GET')
+    form.nav__search(action='/search', method='GET')
+      button.nav__search-btn
         svg
           use(href='/img/icons.svg#icon-search')
       input.nav__search-input(name='name', type='text', placeholder='Search tours')

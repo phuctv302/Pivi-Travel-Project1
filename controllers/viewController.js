@@ -25,10 +25,8 @@ exports.getOverView = catchAsync(async (req, res, next) => {
   const limit = 3;
   const page = req.params.page * 1 || 1;
   const skip = (page - 1) * limit;
-
-  // Get all tours data
-  let query = Tour.find().skip(skip).limit(limit);
-  let maxPage = Math.ceil((await Tour.countDocuments()) / limit);
+  const query = Tour.find().skip(skip).limit(limit);
+  const maxPage = Math.ceil((await Tour.countDocuments()) / limit);
 
   // SORT
   let tours;
@@ -36,21 +34,26 @@ exports.getOverView = catchAsync(async (req, res, next) => {
   if (sortBy) tours = await query.sort(sortBy).sort('-createdAt _id');
   else tours = await query.sort('-createdAt _id');
 
-  // SEARCH
-  let value;
-  if (req.query.name) {
-    value = slug(req.query.name);
-    tours = tours.filter((tour) => tour.slug.includes(value));
-    if (tours.length === 0) return next(new AppError('No tour found', 404));
-    maxPage = Math.ceil(tours.length / limit);
-  }
-
   res.status(200).render('overview', {
     title: 'All Exciting tours',
     tours,
     maxPage,
     current: page,
     sortBy,
+  });
+});
+
+// SEARCH TOUR
+exports.searchTour = catchAsync(async (req, res, next) => {
+  // Get the name to search
+  const value = slug(req.query.name);
+  const tours = await Tour.find({ slug: { $regex: value } });
+
+  if (tours.length === 0) return next(new AppError('No tours found!', 404));
+
+  res.status(200).render('overview', {
+    title: `Search for ${value}`,
+    tours,
   });
 });
 
@@ -82,23 +85,6 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   res.status(200).render('overview', {
     title: 'My tours',
     tours,
-  });
-});
-
-// SEARCH TOUR
-exports.searchTour = catchAsync(async (req, res, next) => {
-  const value = req.params.name.toLowerCase().split(' ').join('');
-  const tours = await Tour.find();
-
-  const data = tours.filter((tour) =>
-    tour.name.split(' ').join('').toLowerCase().includes(value)
-  );
-
-  if (data.length === 0) return next(new AppError('No tour found!', 404));
-
-  res.status(200).render('overview', {
-    title: `Search ${value}`,
-    tours: data,
   });
 });
 
