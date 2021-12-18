@@ -12,12 +12,12 @@ export const updateSettings = async (data, type) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', `Update ${type.toUpperCase()} successfully!`, 3000);
+      showAlert('success', `Update ${type.toUpperCase()} successfully!`);
       window.setTimeout(() => {
         location.reload(true);
-      }, 2);
+      }, 1500);
     }
   } catch (err) {
-    showAlert('error', err.response.data.message, 3);
+    showAlert('error', err.response.data.message);
   }
 };

@@ -19,7 +19,7 @@ export const signup = async (name, email, password, passwordConfirm) => {
       showAlert('success', 'Sign up successfully!');
       window.setTimeout(() => {
         location.assign('/');
-      }, 2000);
+      }, 1500);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
@@ -41,7 +41,7 @@ export const login = async (email, password) => {
       showAlert('success', 'Login successfully!');
       window.setTimeout(() => {
         location.assign('/');
-      }, 1000);
+      }, 1500);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
@@ -97,12 +97,11 @@ export const resetPassword = async (password, passwordConfirm, token) => {
     if (res.data.status === 'success') {
       showAlert(
         'success',
-        'Reset password successfully! Please remember your password.',
-        4
+        'Reset password successfully! Please remember your password.'
       );
       window.setTimeout(() => {
         location.assign('/');
-      }, 2000);
+      }, 1500);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);

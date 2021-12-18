@@ -14,10 +14,10 @@ export const addReview = async (review, rating, tourId, tourSlug) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', 'Thanks for your reviewing!', 3);
+      showAlert('success', 'Thanks for your reviewing!');
       window.setTimeout(() => location.assign(`/tour/${tourSlug}`), 1500);
     }
   } catch (err) {
-    showAlert('error', err.response.data.message, 3);
+    showAlert('error', err.response.data.message);
   }
 };
