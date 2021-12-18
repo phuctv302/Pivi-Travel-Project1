@@ -90,7 +90,7 @@ block content
 
             else if current === maxPage
               li.page-item
-                a.page-link(href=`/tourspage/1/${sortBy}`, aria-label='First')
+                a.page-link(href=`/tours/page/1/${sortBy}`, aria-label='First')
                   span(aria-hidden="true") &laquo;
               - for (let i = current - 2; i <= maxPage; i++)
                 li.page-item(class=`${current === i ? 'active' : ''}`)
