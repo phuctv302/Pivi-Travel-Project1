@@ -1250,6 +1250,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: column;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -1423,4 +1424,79 @@ body {
 /* Review form */
 #rating {
   width: 130px;
+}
+
+/* USER CARDS */
+.card--user-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.card--user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 50px;
+  -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+  background-color: #cddeff;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.card--user .booking-amount {
+  font-size: 1.3rem;
+  margin-right: 15px;
+  margin-bottom: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-profile .user-name {
+  font-weight: 700;
+}
+
+.user-profile .user-email {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+.card--user .user-img {
+  object-fit: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-role {
+  position: absolute;
+  right: 35px;
+  top: 0px;
+  background-color: #1a374d;
+  padding: 3px 10px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.search--user {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.search--user .nav__search-input {
+  color: black;
 }

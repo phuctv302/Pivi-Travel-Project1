@@ -114,7 +114,7 @@ exports.getMe = (req, res, next) => {
 };
 
 // CRUD (create User is sign up)
-exports.getAllUsers = factory.getAll(User);
-exports.getUser = factory.getOne(User);
+exports.getAllUsers = factory.getAll(User, 'tours');
+exports.getUser = factory.getOne(User, 'tours');
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);

@@ -32,4 +32,15 @@ router.get(
   viewController.addReview
 );
 
+/**
+ * ROUTE FOR ADMIN
+ */
+router.get('/users', authController.protect, viewController.getAllUser);
+router.get('/users/search', authController.protect, viewController.searchUser);
+router.get(
+  '/users/page/:page',
+  authController.protect,
+  viewController.getAllUser
+);
+
 module.exports = router;

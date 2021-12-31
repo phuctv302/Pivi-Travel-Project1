@@ -3,52 +3,68 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
-const userSChema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please provide us your name!'],
-    trim: true,
-  },
-  role: {
-    type: String,
-    enum: ['user', 'admin', 'guide', 'lead-guide'],
-    default: 'user',
-  },
-  email: {
-    type: String,
-    required: [true, 'Please provide us your name!'],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email!'],
-  },
-  photo: {
-    type: String,
-    default: 'default.jpg',
-  },
-  password: {
-    type: String,
-    required: [true, 'Please provide us password!'],
-    minlength: [8, 'Password must have more or equal 8 character'],
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password!'],
-    validate: {
-      validator: function (el) {
-        return el === this.password;
+const userSChema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please provide us your name!'],
+      trim: true,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin', 'guide', 'lead-guide'],
+      default: 'user',
+    },
+    email: {
+      type: String,
+      required: [true, 'Please provide us your name!'],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email!'],
+    },
+    photo: {
+      type: String,
+      default: 'default.jpg',
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide us password!'],
+      minlength: [8, 'Password must have more or equal 8 character'],
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password!'],
+      validate: {
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: 'Password are not the same!',
       },
-      message: 'Password are not the same!',
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
     },
   },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
+  {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
+  }
+);
+
+/**
+ * VIRTUAL POPULATE
+ */
+// Access tours from Booking Collection
+userSChema.virtual('tours', {
+  ref: 'Booking',
+  foreignField: 'user',
+  localField: '_id',
 });
 
 // Encrypt password before saving into DB

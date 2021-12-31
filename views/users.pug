@@ -1,0 +1,78 @@
+extend base
+
+block content 
+  main.main
+    form.nav__search.search--user(action='/users/search', method='GET')
+      button.nav__search-btn
+        svg
+          use(href='/img/icons.svg#icon-search')
+      input.nav__search-input(name='name', type='text', placeholder='Search users')
+
+    .card--user-container
+      each user in users
+        .card--user
+          if user.role === 'lead-guide'
+            p.user-role lead guide
+          else 
+            p.user-role= user.role
+
+          .user-info
+            img.user-img(src=`/img/users/${user.photo}` alt= user.name)
+            .user-profile
+              h3.user-name= user.name
+              p.user-email= user.email
+          p.booking-amount Booked #{user.tours.length} tours
+      
+      
+    if current && maxPage
+      // PAGINATION FOR TOURS (BOOTSTRAP 5)
+      nav(aria-label='page pagination')
+        ul.pagination.pagination-lg.justify-content-center
+          if current === 1
+            li.page-item.disabled
+              a.page-link(href=`#`, tabindex='-1', aria-disabled='true') Previous
+          else 
+            li.page-item
+              a.page-link(href=`/users/page/${current-1}`) Previous
+
+
+          if maxPage <= 3
+            - for (let i = 1; i <= maxPage; i++)
+              li.page-item(class=`${current === i ? 'active' : ''}`)
+                a.page-link(href=`/users/page/${i}`)= i
+          else
+            if current < 3
+              - for (let i = 1; i <= 3; i++)  
+                li.page-item(class=`${current === i ? 'active' : ''}`)
+                  a.page-link(href=`/users/page/${i}`)= i
+              li.page-item
+                a.page-link(href=`/users/page/${maxPage}`, aria-label='Last')
+                  span(aria-hidden="true") &raquo;
+
+            else if current === maxPage
+              li.page-item
+                a.page-link(href='/users/page/1', aria-label='First')
+                  span(aria-hidden="true") &laquo;
+              - for (let i = current - 2; i <= maxPage; i++)
+                li.page-item(class=`${current === i ? 'active' : ''}`)
+                  a.page-link(href=`/users/page/${i}`)= i
+
+
+            else 
+              li.page-item
+                a.page-link(href='/users/page/1', aria-label='First')
+                  span(aria-hidden="true") &laquo;
+              - for (let i = current-1; i <= current+1; i++)
+                li.page-item(class=`${current === i ? 'active' : ''}`)
+                  a.page-link(href=`/users/page/${i}`)= i
+              li.page-item
+                a.page-link(href=`/users/page/${maxPage}`, aria-label='Last')
+                  span(aria-hidden="true") &raquo;
+
+
+          if current === maxPage
+            li.page-item.disabled
+              a.page-link(href=`#`, tabindex='-1', aria-disabled='true') Next
+          else
+            li.page-item
+              a.page-link(href=`/users/page/${current+1}`) Next
