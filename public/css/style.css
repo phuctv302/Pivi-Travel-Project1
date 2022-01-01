@@ -1500,3 +1500,156 @@ body {
 .search--user .nav__search-input {
   color: black;
 }
+
+/* MANAGE TOURS */
+.manage-tours {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn--manage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-decoration: none;
+  text-align: center;
+  color: #95cd41;
+  background-color: #004d7a;
+  width: 300px;
+  height: 60px;
+  margin: 20px 0;
+  border-radius: 40px;
+  font-size: 1.5rem;
+  transition: all ease 0.3s;
+}
+
+.btn--manage:hover {
+  background-color: #548cff;
+  color: white;
+}
+
+.CUD-tour {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.CUD-tour .btn--manage {
+  width: 150px;
+  margin: 30px 20px;
+}
+
+.tour-statistics {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.card--statistics {
+  width: 20%;
+  height: fit-content;
+  text-align: center;
+  font-size: 1.2rem;
+  -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.card--statistics .card__title {
+  font-weight: 700;
+  margin: 10px;
+  font-size: 3rem;
+}
+.card--statistics .card__content {
+  padding: 30px 0;
+  font-size: 1.5rem;
+}
+
+.card--statistics .card__content .counter {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.card--easy {
+  background-color: #a6cf98;
+}
+
+.card--medium {
+  background-color: #f0bb62;
+}
+
+.card--difficult {
+  background-color: #ffafaf;
+}
+
+.card--sum {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 500px;
+  margin: 50px 0;
+  background-image: linear-gradient(to right, #f0bb62, #ffafaf, #a6cf98);
+}
+
+.card--sum .card__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 30px 0 0;
+  border-right: rgba(128, 128, 128, 0.3) 1px solid;
+}
+
+.card--sum .card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.all-stats {
+  display: flex;
+  justify-content: center;
+}
+
+/* MONTHLY PLAN */
+.cards--monthly-plan {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.cards--monthly-plan .card {
+  text-align: center;
+  width: 30%;
+  height: fit-content;
+  border-radius: 10px;
+  position: relative;
+  margin: 15px 10px;
+  background-color: #1a374d;
+  color: white;
+}
+
+.card .card__month {
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.card .card__num-tours {
+  font-size: 1.4rem;
+}
+
+.card .card__num-tours .counter {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: yellow;
+}
+
+.title--monthly-plan {
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 700;
+  color: #1a374d;
+  font-size: 5rem;
+}

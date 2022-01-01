@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,300i,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+
+    <title>Pivi Travel | Exciting tours for adventurous people</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav nav--tours">
+        <a href="#" class="nav__el">All tours</a>
+        <form class="nav__search">
+          <button class="nav__search-btn">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-search"></use>
+            </svg>
+          </button>
+          <input
+            type="text"
+            placeholder="Search tours"
+            class="nav__search-input"
+          />
+        </form>
+      </nav>
+      <div class="header__logo">
+        <img src="img/logo-white.png" alt="Pivi Travel logo" />
+      </div>
+      <nav class="nav nav--user">
+        <a href="#" class="nav__el">Log out</a>
+        <a href="#" class="nav__el">
+          <img
+            src="/public/img/users/default.jpg"
+            alt="User photo"
+            class="nav__user-img"
+          />
+          <span>Jonas</span>
+        </a>
+
+        <!-- <button class="nav__el">Log in</button>
+        <button class="nav__el nav__el--cta">Sign up</button> -->
+      </nav>
+    </header>
+
+    <!-- In video, this <main> element is wrongly called: <section class="overview">. So in pug template, please use main.main instead of section.overview -->
+    <main class="main">
+      <div class="all-stats">
+        <div class="card--statistics card--sum">
+          <h2 class="card__title">Pivi Travel</h2>
+          <hr />
+
+          <div class="card__content">
+            <p class="num-tours">
+              The number of tours: <span class="counter">3</span> tours
+            </p>
+            <p class="num-ratings">
+              The number of ratings: <span class="counter">3</span> ratings
+            </p>
+            <p class="avg-rating">
+              The average rating: <span class="counter">3/5</span>
+            </p>
+            <p class="avg-price">
+              The average price: <span class="counter">3</span> $
+            </p>
+            <p class="min-price">
+              The lowest price: <span class="counter">3</span> $
+            </p>
+            <p class="max-price">
+              The highest price: <span class="counter">3</span> $
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tour-statistics">
+        <div class="card--statistics card--easy">
+          <h2 class="card__title">Easy tours</h2>
+          <hr />
+
+          <div class="card__content">
+            <p class="num-tours">
+              The number of tours: <span class="counter">3</span> tours
+            </p>
+            <p class="num-ratings">
+              The number of ratings: <span class="counter">3</span> ratings
+            </p>
+            <p class="avg-rating">
+              The average rating: <span class="counter">3/5</span>
+            </p>
+            <p class="avg-price">
+              The average price: <span class="counter">3</span> $
+            </p>
+            <p class="min-price">
+              The lowest price: <span class="counter">3</span> $
+            </p>
+            <p class="max-price">
+              The highest price: <span class="counter">3</span> $
+            </p>
+          </div>
+        </div>
+
+        <div class="card--statistics card--medium">
+          <h2 class="card__title">Medium tours</h2>
+          <hr />
+
+          <div class="card__content">
+            <p class="num-tours">
+              The number of tours: <span class="counter">3</span>
+            </p>
+            <p class="num-ratings">
+              The number of ratings: <span class="counter">3</span> ratings
+            </p>
+            <p class="avg-rating">
+              The average rating: <span class="counter">3/5</span>
+            </p>
+            <p class="avg-price">
+              The average price: <span class="counter">3</span> $
+            </p>
+            <p class="min-price">
+              The lowest price: <span class="counter">3</span> $
+            </p>
+            <p class="max-price">
+              The highest price: <span class="counter">3</span> $
+            </p>
+          </div>
+        </div>
+
+        <div class="card--statistics card--difficult">
+          <h2 class="card__title">Difficult tours</h2>
+          <hr />
+
+          <div class="card__content">
+            <p class="num-tours">
+              The number of tours: <span class="counter">3</span>
+            </p>
+            <p class="num-ratings">
+              The number of ratings: <span class="counter">3</span> ratings
+            </p>
+            <p class="avg-rating">
+              The average rating: <span class="counter">3/5</span>
+            </p>
+            <p class="avg-price">
+              The average price: <span class="counter">3</span> $
+            </p>
+            <p class="min-price">
+              The lowest price: <span class="counter">3</span> $
+            </p>
+            <p class="max-price">
+              The highest price: <span class="counter">3</span> $
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="footer">
+      <div class="footer__logo">
+        <img src="img/logo-green.png" alt="Pivi Travel logo" />
+      </div>
+      <ul class="footer__nav">
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Download apps</a></li>
+        <li><a href="#">Become a guide</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <p class="footer__copyright">&copy; by Tran Phuc. All rights reserved.</p>
+    </div>
+  </body>
+</html>

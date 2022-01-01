@@ -33,14 +33,16 @@ router.get(
 );
 
 /**
- * ROUTE FOR ADMIN
+ * ROUTES FOR ADMIN
  */
-router.get('/users', authController.protect, viewController.getAllUser);
-router.get('/users/search', authController.protect, viewController.searchUser);
-router.get(
-  '/users/page/:page',
-  authController.protect,
-  viewController.getAllUser
-);
+router.use(authController.protect, authController.restrictTo('admin'));
+
+router.get('/users', viewController.getAllUser);
+router.get('/users/search', viewController.searchUser);
+router.get('/users/page/:page', viewController.getAllUser);
+
+router.get('/manage-tours', viewController.getTourManager);
+router.get('/tour-stats', viewController.getTourStats);
+router.get('/monthly-plan/:year', viewController.getMonthlyPlan);
 
 module.exports = router;

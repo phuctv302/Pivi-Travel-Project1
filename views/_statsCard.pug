@@ -1,0 +1,29 @@
+mixin statsCard(type, numTours, numRatings, avgRating, avgPrice, minPrice, maxPrice)
+  .card--statistics(class=`card--${type.toLowerCase()}`)
+    - const cardTitle = type === 'sum' ? 'Pivi Travel' : `${type} tours`
+    h2(class='card__title')= cardTitle
+    hr
+    div(class='card__content')
+      p.num-tours
+        | The number of tours: 
+        span.counter= numTours 
+        |  tours
+      p.num-ratings
+        | The number of ratings: 
+        span.counter= numRatings
+        |  ratings
+      p.avg-rating
+        | The average rating: 
+        span.counter #{avgRating}/5
+      p.avg-price
+        | The average price: 
+        span.counter= avgPrice
+        |  $
+      p.min-price
+        | The lowest price: 
+        span.counter= minPrice
+        |  $
+      p.max-price
+        | The highest price: 
+        span.counter= maxPrice
+        |  $

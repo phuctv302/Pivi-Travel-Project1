@@ -1,0 +1,13 @@
+extends base
+
+include _statsCard
+
+block content
+  main.main
+    .all-stats
+      +statsCard('sum', stats.numTours, stats.numRatings, stats.avgRating, stats.avgPrice, stats.minPrice, stats.maxPrice)
+
+    .tour-statistics
+      +statsCard('Easy', easyStats.numTours, easyStats.numRatings, easyStats.avgRating, easyStats.avgPrice, easyStats.minPrice, easyStats.maxPrice)
+      +statsCard('Medium', mediumStats.numTours,mediumStats.numRatings, mediumStats.avgRating, mediumStats.avgPrice, mediumStats.minPrice, mediumStats.maxPrice)
+      +statsCard('Difficult', difficultStats.numTours, difficultStats.numRatings, difficultStats.avgRating, difficultStats.avgPrice, difficultStats.minPrice, difficultStats.maxPrice)

@@ -1,0 +1,15 @@
+extend base
+
+block content 
+  main.main
+    h1.title--monthly-plan Monthly Plan in #{year}
+
+    .cards--monthly-plan
+      each month in plan
+        .card
+          h1(class='card__month')= month.month
+          hr
+          p(class='card__num-tours')
+            | The number of tours start: 
+            span.counter= month.numTourStats
+            |  tours
