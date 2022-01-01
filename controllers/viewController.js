@@ -329,8 +329,6 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
     el.month = months[el.month - 1];
   });
 
-  console.log(plan);
-
   res.status(200).render('monthlyPlan', {
     title: 'Monthly Plan',
     plan,
