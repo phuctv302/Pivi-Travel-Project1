@@ -8,7 +8,11 @@ const router = express.Router();
 
 router.use('/:tourId/reviews', reviewRouter);
 
-router.get('/tour-stats', tourController.getTourStats);
+router.get(
+  '/tour-stats',
+  authController.restrictTo('admin', 'lead-guide'),
+  tourController.getTourStats
+);
 router.get(
   '/monthly-plan/:year',
   authController.restrictTo('admin', 'lead-guide', 'guide'),
